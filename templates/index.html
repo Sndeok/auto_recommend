@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+{% import"bootstrap/wtf.html" as wtf %}
+
+{% block title %}Expect{% endblock %}
+{% block head%}
+    {{super()}}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+{% endblock %}
+{% block page_content %}
+<div class="hello" style="display:inline-block;width:100%;margin-left:30px;">
+    <h1>您好！</h1>
+</div>
+<div style="display:inline-block;margin-bottom:20px;width:100%;margin-left:30px;">
+        <h2>符合您要求的结果：</h2>
+</div>
+    <div class="container" style="width:1170px;margin-bottom:100px;">
+        <div class="container" style="width:100%;margin-left:0px;float:left">
+        <table width="100%" class="thead" >
+                <th class="col1">车型</th>
+                <th class="col2">品牌</th>
+                <th class="col3">车系</th>
+                <th class="col4">实际价格</th>
+                <th class="col5">车型名称</th>
+            </table>
+    </div>
+        <div class="container" style="width:1140px;margin-left:0px;">
+            <div class="city">
+                <table width="100%" class="t_body">
+                {% for i in w %}
+                    <tr>
+                        <td class="col1">{{ i['car_class'] }}</td>
+                        <td class="col2">{{ i['car_brand_name'] }}</td>
+                        <td class="col3">{{ i['car_series_name'] }}</td>
+                        <td class="col4">{{ i['car_price'] }}</td>
+                        <td class="col5"><a href="{{ url_for('info',name=i['car_type_name']) }}">{{ i['car_type_name'] }}</a></td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

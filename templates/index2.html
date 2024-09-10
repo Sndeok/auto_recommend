@@ -1,0 +1,22 @@
+
+{% extends "base.html" %}
+{% import"bootstrap/wtf.html" as wtf %}
+{% block title %}欢迎来到auto-query！{% endblock %}
+{% block page_content %}
+{% block head %}
+    {{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+<div class="container" style="margin-bottom:20px;margin-top:20px;">
+    <h1 style="font-size:50px;">Auto-query&nbsp&nbsp欢迎您!</h1>
+
+</div>
+<div class="container" style="margin-bottom:15px;">
+     <h2>请允许我们进行一些了解：</h2>
+</div>
+<div class="container" style="margin:5px;padding:10px;width:90%;font-size:20px;">
+    {{ wtf.quick_form(form,form_type="basic",button_map={'submit':'success',}) }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+
+{% extends "user_base.html" %}
+{% import"bootstrap/wtf.html" as wtf %}
+
+{% block title %}User{{ username }}{% endblock %}
+{% block head%}
+    {{super()}}
+    <style type="text/css">
+    .navbar.navbar-inverse{
+        margin-bottom:0px;
+    }
+    .my_container{
+        display:inline-block;
+        margin-left:17%;
+        margin-right:17%;
+        width:100%;
+    }
+    .my_nav{
+        float:left;
+        width:10%;
+        margin-right:10px;
+        padding-top:5px;
+        padding-bottom:5px;
+    }
+    .active{
+    list-style-type:none;
+    border:5px;
+    }
+    </style>
+{% endblock %}
+{% block page_content %}
+<div class="container">
+    <!--<nav class="my_nav">-->
+        <!--<div>-->
+            <!--<ul>-->
+                <!--<li><a href="#" class="active">推荐</a></li>-->
+                <!--<li><a href="#" class="active">推荐</a></li>-->
+                <!--<li><a href="#" class="active">推荐</a></li>-->
+                <!--<li><a href="#" class="active">推荐</a></li>-->
+                <!--<li><a href="#" class="active">推荐</a></li>-->
+                <!--<li><a href="#" class="active">推荐</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</nav>-->
+    <div class="hello" style="display:inline-block;width:100%;float:left;">
+        <h1>您好,{{ username }}！</h1>
+
+</div>
+</div>
+
+{% endblock %}

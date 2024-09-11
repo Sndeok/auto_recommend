@@ -1,51 +1,126 @@
- .city {
-    display:inline-block;
-   float: left;
-   width: 100%;
-   height:550px;
-   overflow-y:scroll;
-   margin-bottom:50px;
+/* Global body settings */
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans', Arial;
+    font-size: 18px;
+    background: url('background.jpg') no-repeat center center fixed; /* 背景图片 */
+    background-size: cover;
+    color: #333;
 }
-.city::-webkit-scrollbar { width: 0 !important }
 
-body{
-       font-family: 'trebuchet MS', 'Lucida sans', Arial;
-       font-size: 18px;
-    }
-	.col1,.col2,.col3,.col4,.col5{
-		width: 20%
-	}
-	.table_header{
-	    font-size:20px;
-	}
-	.t_body tbody{
-            box-shadow: 2px 2px 1px #ccc;
-            }
-    .thead tbody{
-              border: 1px solid #ccc;
-              box-shadow: 2px 0px 1px #ccc;
-            }
-	th{
-	    color:#f5fffa;
-	    padding:10px;
-		text-align: center;
-		border-right: 1px solid #ccc;
-		border-bottom: 0px;
-        background:#333;
-	}
-	tr:hover{
-	    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#fff5ee), to(#ffffff));
-	}
-	td{
-		border-left:1px solid #ccc;
-	    border-right: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-	    padding:10px;
-		text-align: center;
-	}
-	.btn.btn-success{
-        width:120px;
-        height:50px;
-        font-size:18px;
-        margin-top:20px;
-    }
+/* Table column settings */
+.col1, .col2, .col3, .col4, .col5 {
+    width: 20%;
+}
+
+.table_header {
+    font-size: 20px;
+}
+
+/* Table styling for a smoother look */
+.t_body tbody {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
+    border-radius: 10px; /* 圆角 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 平滑过渡效果 */
+}
+
+.thead tbody {
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #4CAF50; /* 新的动态色彩 */
+    border-radius: 10px 10px 0 0;
+}
+
+th {
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-right: none;
+    font-weight: bold;
+    background: linear-gradient(135deg, #4CAF50, #66BB6A); /* 渐变效果 */
+}
+
+tr:hover {
+    background-color: #f1f8e9; /* 柔和的悬停效果 */
+}
+
+td {
+    border: none;
+    padding: 12px;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-radius: 10px; /* 增加圆角 */
+}
+
+/* Add hover effect to the table */
+.table:hover {
+    transform: scale(1.05); /* 放大1.05倍 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 更强的阴影效果 */
+    z-index: 1; /* 保证表格在其他元素上面 */
+}
+
+/* City scrolling container */
+.city {
+    display: inline-block;
+    float: left;
+    width: 100%;
+    height: 550px;
+    overflow-y: scroll;
+    margin-bottom: 50px;
+    background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* 增加圆角 */
+}
+
+.city::-webkit-scrollbar {
+    width: 5px;
+}
+
+.city::-webkit-scrollbar-thumb {
+    background-color: #4CAF50; /* 滚动条颜色 */
+    border-radius: 10px; /* 滚动条圆角 */
+}
+
+/* Button styling */
+.btn.btn-success {
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    border: none;
+    color: #fff;
+    border-radius: 25px; /* 圆角按钮 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
+    transition: background-color 0.3s ease; /* 动态效果 */
+}
+
+.btn.btn-success:hover {
+    background-color: #45a049; /* 悬停颜色 */
+}
+
+/* Floating window styles */
+#floating-window {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* 更强的阴影 */
+    z-index: 1000;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#header {
+    background-color: #2196F3;
+    color: #00BFFF;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+}

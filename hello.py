@@ -174,6 +174,7 @@ def info(name):
     cur=conn.cursor()
     cur.execute("SELECT car_type_ID FROM long_info WHERE car_type_name='%s'" % (session.get('car_type_name')))
     temp=cur.fetchall()
+    #temp_num = None  # 初始化 temp_num 以避免未赋值错误
     for i in temp:
         temp_num=i['car_type_ID']
         print(temp_num)

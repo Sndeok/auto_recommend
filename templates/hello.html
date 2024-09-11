@@ -1,107 +1,145 @@
 {% extends "base.html" %}
-{% import"bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Detail{% endblock %}
 {% block head %}
     {{ super() }}
     <style type="text/css">
-        body{
-        font-family: 'trebuchet MS', 'Lucida sans', Arial;
-                font-size: 18px;
+        body {
+            font-family: 'Trebuchet MS', 'Lucida sans', Arial;
+            font-size: 18px;
+            background: url('{{ url_for('static', filename='background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
         }
-        .title{
-            margin:10px;
-            padding:20px;
+        .title {
+            margin: 10px;
+            padding: 20px;
+            background: linear-gradient(135deg, #d4e157, #cddc39);
+            border-radius: 12px;
         }
-        li{
-        list-style-type:none;
+        li {
+            list-style-type: none;
         }
-        .info_line{
-        float:left;
-        width:100%
+        .info_line {
+            float: left;
+            width: 100%;
         }
-        h3{
-        font-size:18px;
-        background-color:#333;
-        color:#f5fffa;
-        border:2px solid black;
-        border-radius:5px;
+        /*小标题背景设置*/
+        h3 {
+            font-size: 18px;
+            background: linear-gradient(135deg,#c2e59c,#64b3f4);
+            color: black;
+            border: 2px solid rgba(0, 179, 164, 0.65);
+            border-radius: 12px;
+            padding: 5px;
         }
-        h3:hover{
-        color:white;
+        h3:hover {
+            color: #fff;
+            background: linear-gradient(135deg, #0056b3, #007bff);
         }
-        .Label{
-        float:left;
-        width:40%;
+        .Label {
+            float: left;
+            width: 40%;
+            font-weight: bold;
+            color: #333;
         }
-        .series span{
-        width:20%
+        .series span {
+            width: 20%;
         }
-        .show_image{
-           display:inline-block;width:40%;
-           margin:5px;
-           padding:5px;
-        }
-        .info_container{
+        .show_image {
             display: inline-block;
-            width:60%;
-            margin:5px;
-            padding:5px;
-            float:right;
+            width: 35%;
+            margin: 5px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            border-radius: 12px; /* 增大圆角弧度 */
         }
-        .text_container{
-        display: inline-block;
-        width:100%;
-        margin:1px;
-        }
-        .show_image{
+        .info_container {
             display: inline-block;
-            width:35%;
-            margin:5px;
-            padding:5px;
-            float:left;
+            width: 60%;
+            margin: 5px;
+            padding: 5px;
+            float: right;
+            background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            border: 1px solid #ddd;
+            border-radius: 12px;
         }
-        .part_image{
-            margin-top:21px;
+        .text_container {
             display: inline-block;
-            width:100%;
-            float:left;
+            width: 100%;
+            margin: 1px;
         }
-        .all_info{
-        display: inline-block;
-        width:100%;
+        .part_image {
+            margin-top: 21px;
+            display: inline-block;
+            width: 100%;
+            float: left;
         }
-        .similar{
-        display:inline-block;
-        width:100%;
+        .all_info, .similar, .subtitle, .recommend {
+            display: inline-block;
+            width: 100%;
+            float: left;
+            margin: 10px;
         }
-        .subtitle{
-        display:inline-block;
-        width:100%;
-        float:left;
-        margin:10px;
+        .subtitle, .recommend {
+            margin: 10px 0;
         }
-        .recommend{
-        display:inline-block;
-        width:100%;
-        float:left;
-        margin:10px;
+        /*您可能喜欢背景设置*/
+        .s1, .s2, .s3, .s5 {
+            float: left;
+            width: 15%;
+            background: linear-gradient(135deg,#e6ae8c,#a8cecf);
+            color: #fff;
+            padding: 5px;
+            border-radius: 12px;
+            text-align: center;
         }
-        .s1,.s2,.s3,.s5{
-           float:left;
-           width:15%;
-        }
-        .s4{
-            float:left;
-            width:30%;
+        /*推荐链接*/
+        .s4 {
+            float: left;
+            width: 30%;
+            background: linear-gradient(135deg,#e6ae8c,#a8cecf);
+            color: #fff;
+            padding: 5px;
+            border-radius: 12px;
+            text-align: center;
         }
 
+        /* Floating window styles */
+        #floating-window {
+            position: fixed; /* 改为 fixed 确保悬浮窗固定在视口中 */
+            top: 20px; /* 距离顶部20px */
+            right: 20px; /* 距离右边20px */
+            width: 300px;
+            background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 12px; /* 增大圆角弧度 */
+            z-index: 9999; /* 确保悬浮窗在最前面 */
+        }
+/*悬浮窗背景设置*/
+        #header {
+            background: linear-gradient(135deg,#f7941e,#72c6ef,#00a651); /* 渐变背景 */
+            color: white;
+            padding: 5px;
+            cursor: move;
+            border-radius: 12px;
+        }
     </style>
 {% endblock %}
 {% block page_content %}
 
-
-
 {% for i in detail_info %}
+<div id="floating-window">
+    <div id="header">AI分析</div>
+    <div id="content">
+        <!-- 内容将由 JavaScript 填充 -->
+    </div>
+</div>
+
 <div class="all_info">
     <div class="show_image">
         <div class="part_image">
@@ -112,76 +150,76 @@
         </div>
     </div>
     <div class="info_container">
-    <div class="series" style="width:100%;margin:1px;float:left;">
+        <div class="series" style="width:100%;margin:1px;float:left;">
             <ul>
-                <li><h3>车系</h3></li>
+                <li><h3>概况</h3></li>
                 <li><span class="Label">品牌</span><span>{{i['car_brand_name']}}</span></li>
                 <li><span class="Label">车系</span><span>{{i['car_series_name']}}</span></li>
                 <li><span class="Label">车型</span><span>{{i['car_type_name']}}</span></li>
             </ul>
         </div>
-    <div class="text_container">
-        <div class="price" style="width:49%;margin:1px;float:left;">
-            <ul>
-                <li><h3>售价</h3></li>
-                <li><span class="Label">厂商指导价</span><span>{{i['car_manufacturers_suggested_retail_price']}}w</span></li>
-            </ul>
+        <div class="text_container">
+            <div class="price" style="width:49%;margin:1px;float:left;">
+                <ul>
+                    <li><h3>售价</h3></li>
+                    <li><span class="Label">厂商指导价</span><span>{{i['car_manufacturers_suggested_retail_price']}}w</span></li>
+                </ul>
+            </div>
+            <div class="exhaust" style="width:49%;margin:1px;float:right;">
+                <ul>
+                    <li><h3>排气</h3></li>
+                    <li><span class="Label">进气形式</span><span>{{i['car_airintake_form']}}</span></li>
+                    <li><span class="Label">排量</span><span>{{i['car_displacement_L']}}L</span></li>
+                    <li><span class="Label">环保标准</span><span>{{i['car_intake_form']}}</span></li>
+                    <li><span class="Label">燃料形式</span><span>{{i['car_fuel_form']}}</span></li>
+                </ul>
+            </div>
         </div>
-        <div class="exhaust" style="width:49%;margin:1px;float:right;">
-            <ul>
-                <li><h3>排气</h3></li>
-                <li><span class="Label">进气形式</span><span>{{i['car_gear_box_type']}}</span></li>
-                <li><span class="Label">排量</span><span>{{i['car_displacement_L']}}L</span></li>
-                <li><span class="Label">环保标准</span><span>{{i['car_intake_form']}}</span></li>
-                <li><span class="Label">燃料形式</span><span>{{i['car_fuel_form']}}</span></li>
-            </ul>
+        <div class="text_container">
+            <div class="car_surface" style="width:49%;margin:1px;float:left;">
+                <ul>
+                    <li><h3>车身</h3></li>
+                    <li><span class="Label">车身结构</span><span>{{i['car_surface_structure']}}</span></li>
+                    <li><span class="Label">车长</span><span>{{i['car_length']}}mm</span></li>
+                    <li><span class="Label">车宽</span><span>{{i['car_width']}}mm</span></li>
+                    <li><span class="Label">车高</span><span>{{i['car_height']}}mm</span></li>
+                    <li><span class="Label">轴距</span><span>{{i['car_wheel_base']}}mm</span></li>
+                </ul>
+            </div>
+            <div class="car_body" style="width:49%;margin:1px;float:right;">
+                <ul>
+                    <li><h3>车体</h3></li>
+                    <li><span class="Label">车体结构</span><span>{{i['car_body_structure']}}</span></li>
+                    <li><span class="Label">驱动方式</span><span>{{i['car_driving_way']}}</span></li>
+                    <li><span class="Label">前悬架类型</span><span>{{i['car_front_suspension_type']}}</span></li>
+                    <li><span class="Label">后悬架类型</span><span>{{i['car_back_suspension_type']}}</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text_container">
+            <div class="horse" style="width:49%;margin:1px;float:left;">
+                <ul>
+                    <li><h3>马力</h3></li>
+                    <li><span class="Label">最大马力</span><span>{{i['car_maximum_horsepower']}}Ps</span></li>
+                    <li><span class="Label">变速箱</span><span>{{i['car_rpm']}}rpm</span></li>
+                </ul>
+            </div>
+            <div class="change" style="width:49%;margin:1px;float:right;">
+                <ul>
+                    <li><h3>变速箱</h3></li>
+                    <li><span class="Label">变速箱类型</span><span>{{i['car_gear_box_type']}}</span></li>
+                    <li><span class="Label">变速箱</span><span>{{i['car_gear_box_method']}}</span></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="text_container">
-        <div class="car_surface" style="width:49%;margin:1px;float:left;">
-            <ul>
-                <li><h3>车身</h3></li>
-                <li><span class="Label">车身结构</span><span>{{i['car_surface_structure']}}</span></li>
-                <li><span class="Label">车长</span><span>{{i['car_length']}}mm</span></li>
-                <li><span class="Label">车宽</span><span>{{i['car_width']}}mm</span></li>
-                <li><span class="Label">车高</span><span>{{i['car_height']}}mm</span></li>
-                <li><span class="Label">轴距</span><span>{{i['car_wheel_base']}}mm</span></li>
-            </ul>
-        </div>
-        <div class="car_body" style="width:49%;margin:1px;float:right;">
-            <ul>
-                <li><h3>车体</h3></li>
-                <li><span class="Label">车体结构</span><span>{{i['car_body_structure']}}</span></li>
-                <li><span class="Label">驱动方式</span><span>{{i['car_driving_way']}}</span></li>
-                <li><span class="Label">前悬架类型</span><span>{{i['car_front_suspension_type']}}</span></li>
-                <li><span class="Label">后悬架类型</span><span>{{i['car_back_suspension_type']}}</span></li>
-            </ul>
-        </div>
-    </div>
-    <div class="text_container">
-        <div class="horse" style="width:49%;margin:1px;float:left;">
-            <ul>
-                <li><h3>马力</h3></li>
-                <li><span class="Label">最大马力</span><span>{{i['car_maximum_horsepower']}}Ps</span></li>
-                <li><span class="Label">变速箱</span><span>{{i['car_rpm']}}rpm</span></li>
-            </ul>
-        </div>
-        <div class="change" style="width:49%;margin:1px;float:right;">
-            <ul>
-                <li><h3>变速箱</h3></li>
-                <li><span class="Label">变速箱类型</span><span>{{i['car_gear_box_type']}}</span></li>
-                <li><span class="Label">变速箱</span><span>{{i['car_gear_box_method']}}</span></li>
-            </ul>
-        </div>
-    </div>
-</div>
     <div class="similar">
-        <div class="subtitle"><h1>您可能喜欢：</h1></div>
+        <div class="subtitle"><h1 style="color: white;">您可能喜欢：</h1></div>
         <div class="recommend">
-            <ur>
+            <ul>
                 {% for i in re_point %}
                     <li>
-                       {% for j in i %}
+                        {% for j in i %}
                             {% if loop.index == 4 %}
                                 <a href="{{url_for('info',name=j)}}"><span class="s{{loop.index}}">{{j}}</span></a>
                             {% elif loop.index == 5 %}
@@ -189,24 +227,18 @@
                             {% else %}
                                 <span class="s{{loop.index}}">{{j}}</span>
                             {% endif %}
-                       {% endfor %}
+                        {% endfor %}
                     </li>
                 {% endfor %}
-            </ur>
+            </ul>
         </div>
     </div>
 </div>
 
-
-<!--应该用table-->
-
 {% endfor %}
-    <!--{% for i in detail_info %}-->
-        <!--{% for j,k in i.items()%}-->
-            <!--<div style="float:left;width:40%;margin:10px;padding:10px;text-align:center;"><p><span>{{j}}</span>&nbsp<span>{{k}}</span></p></div>-->
-        <!--{% endfor %}-->
-    <!--{% endfor %}-->
+{% endblock %}
 
-
-
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='floating_window.js') }}"></script>
 {% endblock %}

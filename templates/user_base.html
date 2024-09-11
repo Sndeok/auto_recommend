@@ -1,7 +1,23 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}User{% endblock %}
-{% block navbar%}
-<div class="navbar navbar-inverse" role="navigation">
+{% block navbar %}
+<style>
+    .custom-navbar {
+        background: rgba(255, 255, 255, 0.3); /* 透明白色背景 */
+        backdrop-filter: blur(10px); /* 添加模糊效果 */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* 可选: 添加边框以增强毛玻璃效果 */
+    }
+    .navbar-brand, .nav a {
+        color: #fff !important; /* 确保文本颜色为白色 */
+    }
+    .navbar-nav > li > a {
+        color: #fff !important; /* 确保菜单项颜色为白色 */
+    }
+    .navbar-nav > li > a:hover {
+        color: #ddd; /* 可选: 鼠标悬停时颜色 */
+    }
+</style>
+<div class="navbar navbar-inverse custom-navbar" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -13,7 +29,7 @@
             <span class="navbar-brand">Auto-query</span>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav"  style="float:right;">
+            <ul class="nav navbar-nav" style="float:right;">
                 <li><a href="{{url_for('index')}}">首页</a></li>
                 <li><a href="#">个人中心</a></li>
             </ul>

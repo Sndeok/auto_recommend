@@ -1,31 +1,41 @@
-
 {% extends "user_base.html" %}
-{% import"bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}User{{ username }}{% endblock %}
-{% block head%}
-    {{super()}}
+{% block title %}User {{ username }}{% endblock %}
+{% block head %}
+    {{ super() }}
     <style type="text/css">
-    .navbar.navbar-inverse{
-        margin-bottom:0px;
-    }
-    .my_container{
-        display:inline-block;
-        margin-left:17%;
-        margin-right:17%;
-        width:100%;
-    }
-    .my_nav{
-        float:left;
-        width:10%;
-        margin-right:10px;
-        padding-top:5px;
-        padding-bottom:5px;
-    }
-    .active{
-    list-style-type:none;
-    border:5px;
-    }
+        body {
+            background: url('{{ url_for('static', filename='background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .navbar.navbar-inverse {
+            margin-bottom: 0px;
+        }
+        .my_container {
+            display: inline-block;
+            margin-left: 17%;
+            margin-right: 17%;
+            width: 100%;
+        }
+        .my_nav {
+            float: left;
+            width: 10%;
+            margin-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .active {
+            list-style-type: none;
+            border: 5px;
+        }
+        .hello {
+            display: inline-block;
+            width: 100%;
+            float: left;
+            text-align: center; /* 使文本居中 */
+            color: #fff; /* 设置文本颜色为白色，以便在背景图像上更易读 */
+        }
     </style>
 {% endblock %}
 {% block page_content %}
@@ -42,10 +52,9 @@
             <!--</ul>-->
         <!--</div>-->
     <!--</nav>-->
-    <div class="hello" style="display:inline-block;width:100%;float:left;">
-        <h1>您好,{{ username }}！</h1>
-
+    <div class="hello">
+        <h1>您好, {{ username }}！</h1>
+    </div>
 </div>
-</div>
-
 {% endblock %}
+
